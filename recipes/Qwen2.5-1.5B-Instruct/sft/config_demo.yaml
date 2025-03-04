@@ -5,7 +5,7 @@ torch_dtype: bfloat16
 attn_implementation: flash_attention_2
 
 # Data training arguments
-dataset_name: eyad-silx/SuperNova
+dataset_name: eyad-silx/Mini-nova
 dataset_configs:
 - default
 dataset_num_proc: 48
@@ -34,7 +34,7 @@ num_train_epochs: 3
 output_dir: data/Qwen2.5-1.5B-Open-R1-Distill
 overwrite_output_dir: true
 per_device_eval_batch_size: 16
-per_device_train_batch_size: 4
+per_device_train_batch_size: 8
 push_to_hub: true
 report_to:
 - wandb
