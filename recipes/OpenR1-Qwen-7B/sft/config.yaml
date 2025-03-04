@@ -1,4 +1,3 @@
-# Model arguments
 model_name_or_path: Qwen/Qwen2.5-7B-Instruct-1M
 model_revision: main
 torch_dtype: bfloat16
@@ -6,18 +5,18 @@ attn_implementation: flash_attention_2
 
 # Data training arguments
 dataset_name: eyad-silx/Mini-nova
+dataset_configs:
+- default
 dataset_num_proc: 48
 
 # SFT trainer config
 bf16: true
 do_eval: false
 eval_strategy: 'no'
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 1
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: false
-hub_model_id: silx-ai/Quasar-3.0-Max
-hub_strategy: every_save
 learning_rate: 5.0e-05
 log_level: info
 logging_steps: 5
@@ -25,14 +24,17 @@ logging_strategy: steps
 lr_scheduler_type: cosine_with_min_lr
 lr_scheduler_kwargs:
   min_lr_rate: 0.1
-packing: true
-max_length: 16150
+max_length: 16384
 max_steps: -1
 num_train_epochs: 3
 output_dir: data/Qwen2.5-1.5B-Open-R1-Distill
 overwrite_output_dir: true
+
+
+packing: true
+
 per_device_eval_batch_size: 16
-per_device_train_batch_size: 2
+per_device_train_batch_size: 4
 push_to_hub: true
 report_to:
 - wandb
