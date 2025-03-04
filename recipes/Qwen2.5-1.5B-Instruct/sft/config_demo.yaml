@@ -6,18 +6,13 @@ attn_implementation: flash_attention_2
 
 # Data training arguments
 dataset_name: eyad-silx/Mini-nova
-dataset_configs:
-- all
 dataset_num_proc: 48
-
-preprocessing_num_workers: 8
 
 # SFT trainer config
 bf16: true
 do_eval: false
 eval_strategy: 'no'
-eval_steps: 7000
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 4
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: false
@@ -27,19 +22,23 @@ learning_rate: 5.0e-05
 log_level: info
 logging_steps: 5
 logging_strategy: steps
-lr_scheduler_type: cosine
+lr_scheduler_type: cosine_with_min_lr
+lr_scheduler_kwargs:
+  min_lr_rate: 0.1
 packing: true
-max_length: 10120
+max_length: 6690
 max_steps: -1
 num_train_epochs: 3
 output_dir: data/Qwen2.5-1.5B-Open-R1-Distill
 overwrite_output_dir: true
-packing: true
-per_device_eval_batch_size: 4
-per_device_train_batch_size: 2
+per_device_eval_batch_size: 16
+per_device_train_batch_size: 4
 push_to_hub: true
 report_to:
 - wandb
-save_strategy: "no"
+save_strategy: "steps"
+save_steps: 100
+save_total_limit: 1
 seed: 42
-warmup_ratio: 0.1
+use_liger: true
+warmup_ratio: 0.05
