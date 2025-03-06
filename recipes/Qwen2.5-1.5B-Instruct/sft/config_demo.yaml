@@ -5,14 +5,14 @@ torch_dtype: bfloat16
 attn_implementation: flash_attention_2
 
 # Data training arguments
-dataset_name: eyad-silx/Quasar-Character-3.3
+dataset_name: eyad-silx/Quasar-Max-3.3
 dataset_num_proc: 48
 
 # SFT trainer config
 bf16: true
 do_eval: false
 eval_strategy: 'no'
-gradient_accumulation_steps: 4
+gradient_accumulation_steps: 6
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: false
@@ -20,13 +20,13 @@ hub_model_id: silx-ai/Quasar-3.0-Max
 hub_strategy: every_save
 learning_rate: 5.0e-05
 log_level: info
-logging_steps: 5
+logging_steps: 1
 logging_strategy: steps
 lr_scheduler_type: cosine_with_min_lr
 lr_scheduler_kwargs:
   min_lr_rate: 0.1
 packing: true
-max_length: 12500
+max_length: 4090
 max_steps: -1
 num_train_epochs: 3
 output_dir: data/Qwen2.5-1.5B-Open-R1-Distill
